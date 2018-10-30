@@ -20,7 +20,7 @@ public class discount2Handler extends Handler{
 		 		productQ = cartlist.get(i).getShop_Quantity();
 		 		if(productQ>=100) {
 		 			choseDiscount=new discount2();
-		 			choseDiscount.setcartlist(cartlist);
+		 			choseDiscount.setCartlist(cartlist);
 		 		}
 		 	}
         if (choseDiscount==null) {

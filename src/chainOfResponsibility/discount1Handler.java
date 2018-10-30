@@ -1,8 +1,7 @@
 package chainOfResponsibility;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import discountStrategy.*;
 import model.choseDiscountModel;
 import model.cart;
@@ -14,7 +13,7 @@ public class discount1Handler extends Handler{
 		 cartlist = CORM.getCartlist();
 		 if(cartlist.size()==3 && choseDiscount==null) {
 				choseDiscount=new discount1();
-				choseDiscount.setcartlist(cartlist);
+				choseDiscount.setCartlist(cartlist);
 				return choseDiscount;
 		} else {
 			Handler next = new noDiscountHandler();

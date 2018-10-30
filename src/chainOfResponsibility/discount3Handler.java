@@ -12,7 +12,7 @@ public class discount3Handler extends Handler{
 		 cartlist = CORM.getCartlist();
         if (CORM.getLastYearCost()>100000) {
         	choseDiscount=new discount3();
-			choseDiscount.setcartlist(cartlist);
+			choseDiscount.setCartlist(cartlist);
 			return choseDiscount;
         } else {
         	Handler next = new discount2Handler();
