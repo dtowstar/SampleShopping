@@ -43,13 +43,15 @@
                             <div class="row">
                                 <section class="3u 12u(narrower)"></section>
                                 <section class="6u 12u(narrower)">
+                                	<table>
 									<% 
-										ArrayList<cart> list = cartDAO.getCartByUser_ID(1); 
-										while(list.next()){
-											
+										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(1); 
+										for (cart cartlist : cartlists){
+											out.print("<tr><td>"+ productsDAO.getPD_Infor(String.valueOf(cartlist.getShop_ID()), "PD_Name") +"</td></tr>");
 											
 										}
 									%>
+									</table>
                                     <table class="style1">
                                         <tr>
                                             <td style="text-align: right">

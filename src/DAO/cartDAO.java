@@ -24,6 +24,21 @@ public class cartDAO {
 		}
 		return cartlist; 
 	}
+	public static int getTotalPrice(ArrayList<cart> cartlists){
+		try {
+		while(rs.next()){
+			cart getcart = new cart();
+			getcart.setShop_ID(rs.getInt(1));
+			getcart.setUser_ID(rs.getInt(2));
+			getcart.setPD_ID(rs.getInt(3));
+			getcart.setShop_Quantity(rs.getInt(4));
+			cartlist.add(getcart);
+		}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return cartlist; 
+	}
 	public static int countcart(String User_ID) {
 		int count = 0;
 		String sql = "select * from Cart where User_ID = \'"+User_ID+"\' ";
