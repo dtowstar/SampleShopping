@@ -1,5 +1,4 @@
 package chainOfResponsibility;
-
 import java.util.ArrayList;
 
 import discountStrategy.noDiscount;
@@ -15,6 +14,7 @@ public class noDiscountHandler extends Handler{
 		 if(super.getSuccessor()==null) {
 				choseDiscount=new noDiscount();
 				choseDiscount.setcartlist(cartlist);
+				//改動
 		} 
 		 return choseDiscount;
     }
