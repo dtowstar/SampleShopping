@@ -45,6 +45,7 @@ public class deletecart extends HttpServlet {
 		invoker deleteInvoker = new invoker();
 		deletecartCommand DCCI = new deletecartCommand(ShopID);
 		deleteInvoker.storeAndExecute(DCCI);
+		response.sendRedirect("shopcart.jsp");
 	}
 	
 }
