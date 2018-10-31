@@ -7,10 +7,10 @@ public class discount2 extends discountParent{
 		int productQ;
 		int productPrice;
 		int sumPrice=0;
-			for(int i=0; i<super.getcartlist().size(); i++)
+			for(int i=0; i<super.getCartlist().size(); i++)
 			{
-				productQ = Integer.valueOf(super.getcartlist().get(i).getShop_Quantity());
-				int PD_ID = super.getcartlist().get(i).getPD_ID();
+				productQ = Integer.valueOf(super.getCartlist().get(i).getShop_Quantity());
+				int PD_ID = super.getCartlist().get(i).getPD_ID();
 				String PD_IDS = String.valueOf(PD_ID);
 				productPrice = Integer.parseInt(productsDAO.getPD_Infor(PD_IDS,"PD_Price"));
 				if(productQ>=100) {

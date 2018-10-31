@@ -23,7 +23,7 @@ public class discount4Handler extends Handler{
         }
     }
 	 public boolean whetherHoliday(String dateNowStr) {
-			List<String> lawHolidays = new ArrayList<String>(Arrays.asList(
+			List<String> lawHolidays = new ArrayList<>(Arrays.asList(
 		            "2017-01-01", "2017-01-02", "2017-01-27", "2017-01-28",
 		            "2017-01-29", "2017-01-30", "2017-01-31", "2017-02-01",
 		            "2017-02-02", "2017-04-02", "2017-04-03", "2017-04-04",
@@ -37,7 +37,7 @@ public class discount4Handler extends Handler{
 					if(dateNowStr.equals(holiday))
 							{
 								choseDiscount=new discount4();
-								choseDiscount.setcartlist(cartlist);
+								choseDiscount.setCartlist(cartlist);
 								return true;
 							}
 				}

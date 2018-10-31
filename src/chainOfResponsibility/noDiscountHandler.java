@@ -13,7 +13,7 @@ public class noDiscountHandler extends Handler{
 		 cartlist = CORM.getCartlist();
 		 if(super.getSuccessor()==null) {
 				choseDiscount=new noDiscount();
-				choseDiscount.setcartlist(cartlist);
+				choseDiscount.setCartlist(cartlist);
 				//改動
 		} 
 		 return choseDiscount;

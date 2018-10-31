@@ -18,12 +18,14 @@ public class determine {
 		
 		//找出自己購物車有幾筆
 		cartlist = cartDAO.getCartByUser_ID(User_ID);
+		
 		//找出自己去年消費
 		lastYearCost = usersDAO.getLastYearSpend(User_ID);
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		dateNowStr = sdf.format(date);
 		choseDiscountModel CORM = new choseDiscountModel(dateNowStr,lastYearCost,cartlist);
+		
 		//使用chainOfResponsibility
 		Handler doHandler = new discount4Handler();
 		choseDiscount = doHandler.handlerRequest(CORM);

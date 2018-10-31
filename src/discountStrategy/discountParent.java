@@ -6,8 +6,9 @@ import model.cart;
 
 public abstract class discountParent {
 	private int sumPrice;
-	private  ArrayList<cart> cartlist;
+	private ArrayList<cart> cartlist;
 	int afterDiscountPrice=0;
+	
 	public int getAfterDiscountPrice() {
 		return afterDiscountPrice;
 	}
@@ -16,11 +17,11 @@ public abstract class discountParent {
 		this.afterDiscountPrice = afterDiscountPrice;
 	}
 
-	public ArrayList<cart> getcartlist() {
+	public ArrayList<cart> getCartlist() {
 		return cartlist;
 	}
 
-	public void setcartlist(ArrayList<cart> cartlist) {
+	public void setCartlist(ArrayList<cart> cartlist) {
 		this.cartlist = cartlist;
 	}
 
@@ -36,15 +37,16 @@ public abstract class discountParent {
 	public void calculateSumPrice() {
 		 int productQ;
 		 int productPrice;
-		 int sumPrice=0;
-		 for(int i=0; i<cartlist.size(); i++)
+		 int totalPrice=0;
+		 for(int i = 0; i < cartlist.size(); i++)
 		 {
-			productQ = Integer.valueOf(cartlist.get(i).getShop_Quantity());
+			productQ = cartlist.get(i).getShop_Quantity();
 			int PD_ID = cartlist.get(i).getPD_ID();
-			productPrice = Integer.parseInt(productsDAO.getPD_Infor(Integer.toString(PD_ID),"PD_Price"));
-			sumPrice+=(productQ*productPrice);
+			productPrice = Integer.parseInt(productsDAO.getPD_Infor(Integer.toString(PD_ID), "PD_Price"));
+			totalPrice += (productQ * productPrice);
 		 }
-		 setPrice(sumPrice);
+		 
+		 setPrice(totalPrice);
 	}
 	public abstract void doDiscount();
 
