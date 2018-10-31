@@ -2,7 +2,7 @@
 
 <!DOCTYPE HTML>
 
-<html>
+<html lang="zh-Hans-TW">
 	<head>
 		<title>SampleShop for Learning Coding</title>
 		<meta charset="utf-8" />
@@ -16,20 +16,20 @@
 				<div id="header-wrapper">
 					<div id="header" class="container">
 						<!-- Logo -->
-							<h1 id="logo"><a href="index.aspx">SAMPLE SHOP</a></h1>
+							<h1 id="logo"><a href="index.jsp">SAMPLE SHOP</a></h1>
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
 									<li>
 										<a href="#">新品上市</a>
 										<ul>
-											<li><a href="PDlist.aspx">每周新品</a></li>
-											<li><a href="PDlist.aspx">夏季新品</a></li>
+											<li><a href="PDlist.jsp">每周新品</a></li>
+											<li><a href="PDlist.jsp">夏季新品</a></li>
 										</ul>
 									</li>
-									<li><a href="PDlist.aspx">暢銷排行</a></li>
-									<li class="break"><a href="PDlist.aspx">全館商品</a></li>
-									<li><a href="PDlist.aspx">精選活動</a></li>
+									<li><a href="PDlist.jsp">暢銷排行</a></li>
+									<li class="break"><a href="PDlist.jsp">全館商品</a></li>
+									<li><a href="PDlist.jsp">精選活動</a></li>
 								</ul>
 							</nav>
 					</div>
@@ -43,24 +43,28 @@
                             <div class="row">
                                 <section class="3u 12u(narrower)"></section>
                                 <section class="6u 12u(narrower)">
-                                	<table>
+                                	
+                                	<table style="border-top:3px #FFD382 solid;border-bottom:3px #FFD382 solid;" >
+                                		<thead>
+                                			<tr>
+	                                			<th>商品名稱</th>
+	                                			<th>單價</th>
+	                                			<th>數量</th>
+	                                			<th>小計</th>
+                                			</tr>
+                                		</thead>
 									<% 
-										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(1); 
+										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(Integer.parseInt(String.valueOf(session.getAttribute("User_ID")))); 
 										for (cart cartlist : cartlists){
-											out.print("<tr><td>"+ productsDAO.getPD_Infor(String.valueOf(cartlist.getShop_ID()), "PD_Name") +"</td></tr>");
-											
+											out.print("<tr align='center' valign='middle'><td>"+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") +"</td><td>"+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") +"</td><td>"+cartlist.getShop_Quantity()+"</td><td>"+ cartDAO.getSumPrice(cartlist) +"</td></tr>");
 										}
 									%>
 									</table>
                                     <table class="style1">
+                                        
                                         <tr>
                                             <td style="text-align: right">
-                                                -----------------------------
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="LB_shoplist_showprice" runat="server" Text="Label"></asp:Label>
+                                            	總計：<%out.print(""+cartDAO.getTotalPrice(cartlists)+""); %>
                                             </td>
                                         </tr>
                                         <tr>
@@ -74,10 +78,9 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
-                                            	
-                                                <asp:Button ID="BT_shoplist_toBuy" runat="server" Text="繼續購物" PostBackUrl="~/PDlist.aspx" />
-                                                &nbsp;&nbsp;&nbsp;
-                                                <asp:Button ID="BT_shoplist_toPay" runat="server" Text="完成訂單" />
+                                            	<a href="PDlist.jsp"><input type="submit" ID="BT_shoplist_toBuy" Value="繼續購物" ></a>
+                                            	&nbsp;&nbsp;&nbsp;
+                                            	<input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" >
                                             </td>
                                         </tr>
                                     </table>

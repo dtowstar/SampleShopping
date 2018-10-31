@@ -6,17 +6,20 @@ import model.cart;
 
 public class cartDAO {
 	
-	private static ArrayList<cart> cartlist;
+	
 	public static ArrayList<cart> getCartByUser_ID(int User_ID){
-		String sql = "select * from Cart where User_ID = \'"+User_ID+"\' ";
+		String sql = "select * from Cart where User_ID = "+User_ID+" ";
+		int count = 0;
+		ArrayList<cart> cartlist = new ArrayList<cart>();
 		try {
 		ResultSet rs = databaseDAO.getResult(sql);
 		while(rs.next()){
+			count+=1;
 			cart getcart = new cart();
-			getcart.setShop_ID(rs.getInt(1));
-			getcart.setUser_ID(rs.getInt(2));
-			getcart.setPD_ID(rs.getInt(3));
-			getcart.setShop_Quantity(rs.getInt(4));
+			getcart.setShop_ID(rs.getInt("Shop_ID"));
+			getcart.setUser_ID(rs.getInt("User_ID"));
+			getcart.setPD_ID(rs.getInt("PD_ID"));
+			getcart.setShop_Quantity(rs.getInt("Shop_Quantity"));
 			cartlist.add(getcart);
 		}
 		}catch(Exception e) {
@@ -24,20 +27,27 @@ public class cartDAO {
 		}
 		return cartlist; 
 	}
-	public static int getTotalPrice(ArrayList<cart> cartlists){
+	
+	public static int getSumPrice(cart cart){
+		int SumPrice = 0;
 		try {
-		while(rs.next()){
-			cart getcart = new cart();
-			getcart.setShop_ID(rs.getInt(1));
-			getcart.setUser_ID(rs.getInt(2));
-			getcart.setPD_ID(rs.getInt(3));
-			getcart.setShop_Quantity(rs.getInt(4));
-			cartlist.add(getcart);
-		}
+			SumPrice += Integer.parseInt(productsDAO.getPD_Infor(String.valueOf(cart.getPD_ID()), "PD_Price"))*cart.getShop_Quantity();
+			
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-		return cartlist; 
+		return SumPrice; 
+	}
+	public static int getTotalPrice(ArrayList<cart> cartlists){
+		int TotalPrice = 0;
+		try {
+			for (cart cartlist:cartlists) {
+				TotalPrice += Integer.parseInt(productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price"))*cartlist.getShop_Quantity();
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return TotalPrice; 
 	}
 	public static int countcart(String User_ID) {
 		int count = 0;

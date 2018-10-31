@@ -95,10 +95,10 @@
 									            <div class="row">
 											            <%
 											            	
-											         		String sql= "SELECT * FROM [Products]";
+											         		String sql= "select * from [Products]";
 											            	ResultSet rs = databaseDAO.getResult(sql);
 											            	while(rs.next()){
-											            		out.print("<div class='col-sm-3'><a href='PD.jsp?pid="+ rs.getString("PD_ID") +"'><img src='images/"+ rs.getString("PD_Photo") +".jpg' style='height:208px;width:160px;''></a > <br> "+ rs.getString("PD_Name") +" &nbsp; "+ rs.getString("PD_Price") +" </div>\n");
+											            		out.print("<div class='col-sm-3'><a href='PD.jsp?pid="+ rs.getString("PD_ID") +"'><img src='images/"+ rs.getString("PD_Photo") +"' style='height:208px;width:160px;''></a > <br> "+ rs.getString("PD_Brand") +" "+ rs.getString("PD_Type") +" <br>"+ rs.getString("PD_Name") +" <br> NT: &nbsp;"+ rs.getString("PD_Price") +" </div>\n");
 											            	}
 											            %>
 									            </div>

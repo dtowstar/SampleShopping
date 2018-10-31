@@ -44,7 +44,7 @@ public class login extends HttpServlet {
 			}else{
 				
 				response.setContentType("text/html;charset=UTF-8"); 
-				response.getWriter().println("<script>alert('登入失敗'); window.location='../PDlist.jsp' </script>");
+				response.getWriter().println("<script>alert('登入失敗'); window.location='PDlist.jsp' </script>");
 				
 			}
 			

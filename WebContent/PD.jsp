@@ -73,7 +73,7 @@
 
 											        <p>會員狀態：</p>
                                                     <p>
-                                                    	<a href="#">目前購物車有 (0) 件商品</a>
+                                                    	<a href="#">目前購物車有 (  <%out.println(cartDAO.countcart(String.valueOf(session.getAttribute("User_ID"))));%>) 件商品</a>
                                                     </p>
 											        <p><input type="submit" ID="BT_Logout" Value="登出"></p>
 										        </section>
@@ -97,7 +97,7 @@
 												    </h3>
 											    </header>
                                                 
-                                                <p><%out.println("<img src='images/"+ productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Photo") +".jpg' style='height:416px;width:320px;''>");%></p>
+                                                <p><%out.println("<img src='images/"+ productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Photo") +"' style='height:416px;width:320px;''>");%></p>
                                                 
 										    </section>
 										    
