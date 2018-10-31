@@ -42,7 +42,6 @@ public class login extends HttpServlet {
 				session.setAttribute("User_Name",usersDAO.getUser_Infor(account, password, "User_Name"));
 				response.sendRedirect("PDlist.jsp");
 			}else{
-				
 				response.setContentType("text/html;charset=UTF-8"); 
 				response.getWriter().println("<script>alert('登入失敗'); window.location='PDlist.jsp' </script>");
 				

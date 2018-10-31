@@ -32,18 +32,28 @@ public class addtocart extends HttpServlet {
 		String quantity = String.valueOf(request.getParameter("Quantity"));
 		String pid =  String.valueOf(request.getParameter("pid"));
 		HttpSession session = request.getSession(true);
+		System.out.print("測試段1");
+		System.out.println(session.getAttribute("User_ID"));
+		System.out.print("測試段2");
+		System.out.println(String.valueOf(session.getAttribute("User_ID")));
 		String User_ID = String.valueOf(session.getAttribute("User_ID"));
-		if (cartDAO.ishascart(User_ID, pid)) {
-			System.out.println("4");
-			response.setContentType("text/html;charset=UTF-8"); 
-			response.getWriter().println("<script>alert('商品已加入購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
+		if ((User_ID!= null) || (User_ID=="")){
+			if (cartDAO.ishascart(User_ID, pid)) {
+				response.setContentType("text/html;charset=UTF-8"); 
+				response.getWriter().println("<script>alert('商品已加入購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
+			}else{
+				cartDAO.addcart(User_ID, pid, quantity);
+				response.setContentType("text/html;charset=UTF-8");
+				response.getWriter().println("<script>alert('成功加入購物車'); window.location='PDlist.jsp' </script>");
+			}
 		}else{
-			System.out.println("5");
-			cartDAO.addcart(User_ID, pid, quantity);
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("<script>alert('請先登入會員'); window.location='PDlist.jsp' </script>");
+		
 		}
-		System.out.println("6");
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().println("<script>alert('成功加入購物車'); window.location='PDlist.jsp' </script>");
+		
+		
+		
 	}
 
 	/**

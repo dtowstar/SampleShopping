@@ -26,14 +26,19 @@ public class cartDAO {
 		}
 		return cartlist; 
 	}
-	public static String getSelectCase(int PD_ID) {
+	public static String getSelectCase(int PD_ID,int Shop_Quantity) {
 		String sql = "select * from Products where PD_ID = "+PD_ID+" ";
 		String str = "";
 		try {
 			ResultSet rs = databaseDAO.getResult(sql);
 			while(rs.next()){
 				for (int i=1;i<=rs.getInt("PD_Quantity");i++){
-    				str +="<option value='"+ i +"'>"+ i +"</option> ";
+					if (i == Shop_Quantity) {
+						str +="<option value='"+ i +"' selected>"+ i +"</option> ";
+					}else {
+						str +="<option value='"+ i +"'>"+ i +"</option> ";
+					}
+    				
     			}
 			}
 			}catch(Exception e) {

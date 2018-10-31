@@ -64,7 +64,7 @@
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") 
 											+"</td><td><select id='Quantity' name='Quantity' size='1'>"+
-											cartDAO.getSelectCase(cartlist.getPD_ID())
+											cartDAO.getSelectCase(cartlist.getPD_ID(),cartlist.getShop_Quantity())
 											+"</td><td>"
 											+ cartDAO.getSumPrice(cartlist) 
 											+"</td></tr>");
