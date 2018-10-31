@@ -6,7 +6,6 @@ import model.cart;
 
 public class cartDAO {
 	
-	
 	public static ArrayList<cart> getCartByUser_ID(int User_ID){
 		String sql = "select * from Cart where User_ID = "+User_ID+" ";
 		int count = 0;
@@ -28,6 +27,33 @@ public class cartDAO {
 		return cartlist; 
 	}
 	
+	public static void addcart(String User_ID,String PD_ID,String Quantity) {
+		String sql = String.format("insert into Cart(User_ID,PD_ID,Shop_Quantity) values ('%d','%d','%d')",Integer.parseInt(User_ID),Integer.parseInt(PD_ID),Integer.parseInt(Quantity));
+		try {
+			databaseDAO.useUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void updatePD_Quantity(int Shop_ID,int totalProduct) {
+		String sql = String.format("update Cart set Shop_Quantity = '%d' where PD_ID = \'"+Shop_ID+"\' ",totalProduct);
+		try {
+			databaseDAO.useUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void deleteCart(int Shop_ID) {
+		String sql = String.format("delete from Cart where Shop_ID = \'"+Shop_ID+"\' ");
+		try {
+			databaseDAO.useUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
 	public static int getSumPrice(cart cart){
 		int SumPrice = 0;
 		try {
@@ -38,6 +64,7 @@ public class cartDAO {
 		}
 		return SumPrice; 
 	}
+	
 	public static int getTotalPrice(ArrayList<cart> cartlists){
 		int TotalPrice = 0;
 		try {
@@ -49,6 +76,7 @@ public class cartDAO {
 		}
 		return TotalPrice; 
 	}
+	
 	public static int countcart(String User_ID) {
 		int count = 0;
 		String sql = "select * from Cart where User_ID = \'"+User_ID+"\' ";
@@ -62,14 +90,6 @@ public class cartDAO {
 			}
 		return count;
 		
-	}
-	public static void addcart(String User_ID,String PD_ID,String Quantity) {
-		String sql = String.format("insert into Cart(User_ID,PD_ID,Shop_Quantity) values ('%d','%d','%d')",Integer.parseInt(User_ID),Integer.parseInt(PD_ID),Integer.parseInt(Quantity));
-		try {
-			databaseDAO.useUpdate(sql);
-		}catch(Exception e) {
-			System.out.println(e);
-		}
 	}
 	public static boolean ishascart(String User_ID,String PD_ID) {
 		int UID = Integer.parseInt(User_ID);
@@ -91,14 +111,6 @@ public class cartDAO {
 		}
 		System.out.println("comfirm return out false");
 		return false;
-	}
-	public static void updatePD_Quantity(int Shop_ID,int totalProduct) {
-		String sql = String.format("update Cart set Shop_Quantity = '%d' where PD_ID = \'"+Shop_ID+"\' ",totalProduct);
-		try {
-			databaseDAO.useUpdate(sql);
-		}catch(Exception e) {
-			System.out.println(e);
-		}
 	}
 	
 	public static void addFreeCart(int User_ID,int productY) {
