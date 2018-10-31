@@ -95,10 +95,11 @@
                                             	<a href="PDlist.jsp"><input type="submit" ID="BT_shoplist_toBuy" Value="繼續購物" ></a>
                                             	&nbsp;&nbsp;&nbsp;
                                             	<a href="Orderlist.jsp"><input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" ></a>
+                                            	<a href="useRestores"><input type="button" ID="restoreID" Value="undo" ></a>
                                             </td>
                                         </tr>
                                     </table>
-                                    
+                
                                 </section>
                                 <section class="3u 12u(narrower)"></section>
                             </div>
@@ -161,7 +162,12 @@
 	        	var selected = $(qid).val();
 	        	document.location = "changeCPQ?Shop_ID="+sid+"&P_Quantity="+selected;
 	        }
-        	
+	        
+	        <%--document.getElementById("#restoreID").addEventListener(‘onclick’, function(){
+	        	<%restore.useRestore();%>
+	        	location.replace(shopcart.jsp);
+	        }, false);--%>
+	        <%--
 	        document.onkeydown = function(e) {
 	            var keyCode = e.keyCode || e.which || e.charCode;
 	            var ctrlKey = e.ctrlKey || e.metaKey;
@@ -170,8 +176,9 @@
 	            }
 	            e.preventDefault();
 	            return false;
-	        }
+	        }--%>
         </script>
+  
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
