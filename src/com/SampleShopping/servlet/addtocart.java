@@ -32,10 +32,6 @@ public class addtocart extends HttpServlet {
 		String quantity = String.valueOf(request.getParameter("Quantity"));
 		String pid =  String.valueOf(request.getParameter("pid"));
 		HttpSession session = request.getSession(true);
-		System.out.print("測試段1");
-		System.out.println(session.getAttribute("User_ID"));
-		System.out.print("測試段2");
-		System.out.println(String.valueOf(session.getAttribute("User_ID")));
 		String User_ID = String.valueOf(session.getAttribute("User_ID"));
 		if ((User_ID!= null) || (User_ID=="")){
 			if (cartDAO.ishascart(User_ID, pid)) {

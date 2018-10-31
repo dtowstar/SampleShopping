@@ -5,7 +5,7 @@ import DAO.cartDAO;
 public class updatePD_QuantityCommand implements command{
 	private int Shop_ID;
 	private int totalProduct;
-	updatePD_QuantityCommand(int Shop_ID,int totalProduct){
+	public updatePD_QuantityCommand(int Shop_ID,int totalProduct){
 		this.Shop_ID=Shop_ID;
 		this.totalProduct=totalProduct;
 	}
