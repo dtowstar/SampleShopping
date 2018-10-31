@@ -12,6 +12,7 @@ public class productsDAO {
 	private static String PD_Desc;
 	
 	public static String getPD_Infor(String PD_ID,String column) {
+
 		String sql = "select * from Products where PD_ID = \'"+PD_ID+"\' ";
 		try {
 			ResultSet rs = databaseDAO.getResult(sql);
@@ -44,6 +45,15 @@ public class productsDAO {
 				return PD_Desc;
 			default:
 				return "";
+		}
+	}
+	public static void updatePD_Quantity(int PD_ID,int Quantity) {
+		
+		String sql = String.format("update Products set PD_Quantity = '%d' where PD_ID = '%d' ",Quantity,PD_ID);
+		try {
+			databaseDAO.useUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e);
 		}
 	}
 }

@@ -46,6 +46,8 @@ public class changeCPQ extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String ShopID =  String.valueOf(request.getParameter("Shop_ID"));
 		String PQuantity = String.valueOf(request.getParameter("P_Quantity"));
+		System.out.println(ShopID);
+		System.out.println(PQuantity);
 		int s = Integer.parseInt(ShopID);
 		int q = Integer.parseInt(PQuantity);
 		invoker Invoker = invoker.createInvoker();

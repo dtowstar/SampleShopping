@@ -46,6 +46,24 @@ public class cartDAO {
 			}
 		return str;
 	}
+	
+	public static cart getCartByShop_ID(int Shop_ID){
+		  String sql = "select * from Cart where Shop_ID = "+Shop_ID+" ";
+		  cart getcart = new cart();
+		  try {
+		  ResultSet rs = databaseDAO.getResult(sql);
+		  while(rs.next()){
+		   getcart.setShop_ID(rs.getInt("Shop_ID"));
+		   getcart.setUser_ID(rs.getInt("User_ID"));
+		   getcart.setPD_ID(rs.getInt("PD_ID"));
+		   getcart.setShop_Quantity(rs.getInt("Shop_Quantity"));
+		  }
+		  }catch(Exception e) {
+		   System.out.println(e);
+		  }
+		  return getcart; 
+		 }
+	
 	public static void addcart(String User_ID,String PD_ID,String Quantity) {
 		String sql = String.format("insert into Cart(User_ID,PD_ID,Shop_Quantity) values ('%d','%d','%d')",Integer.parseInt(User_ID),Integer.parseInt(PD_ID),Integer.parseInt(Quantity));
 		try {
@@ -56,9 +74,12 @@ public class cartDAO {
 	}
 	
 	public static void updatePD_Quantity(int Shop_ID,int totalProduct) {
-		String sql = String.format("update Cart set Shop_Quantity = '%d' where PD_ID = \'"+Shop_ID+"\' ",totalProduct);
+		String sql = String.format("update Cart set Shop_Quantity = '%d' where Shop_ID = '%d' ",totalProduct,Shop_ID);
 		try {
+			System.out.println("有使用資料庫");
 			databaseDAO.useUpdate(sql);
+			System.out.println("有使用資料庫1");
+			
 		}catch(Exception e) {
 			System.out.println(e);
 		}

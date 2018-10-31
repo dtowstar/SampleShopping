@@ -1,4 +1,4 @@
-<%@ page  import="java.util.*, java.sql.*,DAO.*,model.*" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page  import="java.util.*, java.sql.*,DAO.*,model.*,discountStrategy.*,shoppingCartCommand.* " language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML>
 
@@ -56,17 +56,21 @@
                                 		</thead>
 									<% 
 										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(Integer.parseInt(String.valueOf(session.getAttribute("User_ID")))); 
+										int index = 0;
+										
 										for (cart cartlist : cartlists){
+											index++;
+											String qid = String.valueOf(index);
 											out.print("<tr align='center' valign='middle'><td>"
 											+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='delete'></a> "
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") 
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") 
-											+"</td><td><select id='Quantity' name='Quantity' size='1'>"+
+											+"</td><td><select id='"+index+"' name='"+index+"' size='1' onchange='UpdateQuantity("+cartlist.getShop_ID()+","+qid+")'>"+
 											cartDAO.getSelectCase(cartlist.getPD_ID(),cartlist.getShop_Quantity())
 											+"</td><td>"
-											+ cartDAO.getSumPrice(cartlist) 
+											+ cartDAO.getSumPrice(cartlist)
 											+"</td></tr>");
 										}
 									%>
@@ -80,18 +84,17 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
-                                                ===================
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
+                                            	折扣後：<% determine n = new determine(Integer.parseInt(String.valueOf(session.getAttribute("User_ID"))));
+                                            			int discountP = n.getAfterDiscountPrice();
+                                            			out.println(discountP);
+                                            			%>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
                                             	<a href="PDlist.jsp"><input type="submit" ID="BT_shoplist_toBuy" Value="繼續購物" ></a>
                                             	&nbsp;&nbsp;&nbsp;
-                                            	<input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" >
+                                            	<a href="Orderlist.jsp"><input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" ></a>
                                             </td>
                                         </tr>
                                     </table>
@@ -152,7 +155,23 @@
 				</div>
 
 		</div>
-        
+        <script type="text/javascript">
+	        function UpdateQuantity(sid,id){
+	        	var qid = '#'+id;
+	        	var selected = $(qid).val();
+	        	document.location = "changeCPQ?Shop_ID="+sid+"&P_Quantity="+selected;
+	        }
+        	
+	        document.onkeydown = function(e) {
+	            var keyCode = e.keyCode || e.which || e.charCode;
+	            var ctrlKey = e.ctrlKey || e.metaKey;
+	            if(ctrlKey && keyCode == 90) {
+	            	restore.useRestore();
+	            }
+	            e.preventDefault();
+	            return false;
+	        }
+        </script>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>

@@ -1,7 +1,7 @@
 package shoppingCartCommand;
 import java.util.*;
 public class invoker {
-	 private List<command> history = new ArrayList<command>();
+	 private static List<command> history = new ArrayList<command>();
 	 private static invoker Instance = null;
 
 	   public invoker() {
@@ -21,4 +21,13 @@ public class invoker {
 	      this.history.add(cmd); // optional 
 	      cmd.execute();        
 	   }
+	   
+	   public static List<command> getCommandList(){
+		   return history;
+	   }
+	   
+	   public static void setCommandList(List<command> in){
+		   history=in;
+	   }
+	   
 }
