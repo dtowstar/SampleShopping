@@ -57,20 +57,14 @@
 									<% 
 										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(Integer.parseInt(String.valueOf(session.getAttribute("User_ID")))); 
 										for (cart cartlist : cartlists){
-											int count = Integer.parseInt(productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()),"PD_Quantity"));
-							    			String str ="";
-											int i = 1 ;
-							    			for (i=1;i<=count;i++){
-							    				out.print("<option value='"+ i +"'>"+ i +"</option> ");
-							    			}
 											out.print("<tr align='center' valign='middle'><td>"
 											+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='delete'></a> "
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") 
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") 
-											+"</td><td><select id='Quantity' name='Quantity' size='1'>"
-											
+											+"</td><td><select id='Quantity' name='Quantity' size='1'>"+
+											cartDAO.getSelectCase(cartlist.getPD_ID())
 											+"</td><td>"
 											+ cartDAO.getSumPrice(cartlist) 
 											+"</td></tr>");

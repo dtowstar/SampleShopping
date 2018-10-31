@@ -26,7 +26,21 @@ public class cartDAO {
 		}
 		return cartlist; 
 	}
-	
+	public static String getSelectCase(int PD_ID) {
+		String sql = "select * from Products where PD_ID = "+PD_ID+" ";
+		String str = "";
+		try {
+			ResultSet rs = databaseDAO.getResult(sql);
+			while(rs.next()){
+				for (int i=1;i<=rs.getInt("PD_Quantity");i++){
+    				str +="<option value='"+ i +"'>"+ i +"</option> ";
+    			}
+			}
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+		return str;
+	}
 	public static void addcart(String User_ID,String PD_ID,String Quantity) {
 		String sql = String.format("insert into Cart(User_ID,PD_ID,Shop_Quantity) values ('%d','%d','%d')",Integer.parseInt(User_ID),Integer.parseInt(PD_ID),Integer.parseInt(Quantity));
 		try {
