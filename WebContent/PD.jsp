@@ -116,16 +116,27 @@
 											    <p>購買數量： <select id="Quantity" name="Quantity" size="1"  >
 											    		<%
 											    			int count = Integer.parseInt(productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Quantity"));
-											    			int i = 1 ;
-											    			for (i=1;i<=count;i++){
+											    			if(count!=0){
+											    				int i = 1 ;
+												    			for (i=1;i<=count;i++){
+												    				out.print("<option value='"+ i +"'>"+ i +"</option> ");
+												    			}
+											    			}
+											    			else{
+											    				int i = 0 ;
 											    				out.print("<option value='"+ i +"'>"+ i +"</option> ");
 											    			}
+											    			
 											    		%>
 														</select> 
 												</p>
                                                 <p><%out.println(productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Desc")); %></p>
                                                 <% session.setAttribute("pid",request.getParameter("pid")); %>
+                                                <% if(count!=0){%>
                                                 <input type="submit" ID="BT_PD_AddShoplist" Value="　加入購物車　" >
+                                                <% }else{%>
+                                                <input type="submit" ID="BT_PD_AddShoplist" Value="　訂閱此商品　" >
+                                                <% }%>
 										    </section>
 										</form>
 									    </article>

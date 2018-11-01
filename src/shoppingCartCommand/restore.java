@@ -27,11 +27,13 @@ public class restore {
 				 cartDAO.addcart(String.valueOf(gDC.getUser_ID()),String.valueOf(gDC.getPD_ID()),String.valueOf(gDC.getShop_Quantity()));
 				 System.out.println("執行DRESTOREDB成功");
 			 }
-			 else {
+			 else if(RC instanceof updatePD_QuantityCommand){
 				 cart gUCQ = UCQ.get(UCQL-1);
 				 UCQ.remove(UCQL-1);
+				 System.out.println("有執行QQRESTORE");
 				 updatePD_QuantityCommand.setUPQL(UCQ);
 				 cartDAO.updatePD_Quantity(gUCQ.getShop_ID(),gUCQ.getShop_Quantity());
+				 System.out.println("有執行QQRESTORE成功");
 			 }
 		 }
 	}

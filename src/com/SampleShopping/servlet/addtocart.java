@@ -34,13 +34,22 @@ public class addtocart extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String User_ID = String.valueOf(session.getAttribute("User_ID"));
 		if ((User_ID!= null) || (User_ID=="")){
-			if (cartDAO.ishascart(User_ID, pid)) {
+			if(quantity.equals("0")) {
+				System.out.println("進入改訂月");
+				usersDAO.updateUser_SubcribePD(User_ID,pid);
+				System.out.println("進入改訂月完成");
 				response.setContentType("text/html;charset=UTF-8"); 
-				response.getWriter().println("<script>alert('商品已加入購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
-			}else{
-				cartDAO.addcart(User_ID, pid, quantity);
-				response.setContentType("text/html;charset=UTF-8");
-				response.getWriter().println("<script>alert('成功加入購物車'); window.location='PDlist.jsp' </script>");
+				response.getWriter().println("<script>alert('商品已訂閱'); window.location='PDlist.jsp' </script>");
+			}
+			else {
+				if (cartDAO.ishascart(User_ID, pid)) {
+					response.setContentType("text/html;charset=UTF-8"); 
+					response.getWriter().println("<script>alert('商品已加入購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
+				}else{
+					cartDAO.addcart(User_ID, pid, quantity);
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().println("<script>alert('成功加入購物車'); window.location='PDlist.jsp' </script>");
+				}
 			}
 		}else{
 			response.setContentType("text/html;charset=UTF-8");

@@ -62,7 +62,7 @@
 											index++;
 											String qid = String.valueOf(index);
 											out.print("<tr align='center' valign='middle'><td>"
-											+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='delete'></a> "
+											+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='刪除'></a> "
 											+"</td><td>"
 											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") 
 											+"</td><td>"
@@ -92,10 +92,13 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
+                                            	<a href="useRestores"><input type="button" ID="restoreID" Value="回上一步" ></a>
+                                            	&nbsp;&nbsp;&nbsp;
                                             	<a href="PDlist.jsp"><input type="submit" ID="BT_shoplist_toBuy" Value="繼續購物" ></a>
                                             	&nbsp;&nbsp;&nbsp;
                                             	<a href="Orderlist.jsp"><input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" ></a>
-                                            	<a href="useRestores"><input type="button" ID="restoreID" Value="undo" ></a>
+                                            	&nbsp;&nbsp;&nbsp;
+                                            	
                                             </td>
                                         </tr>
                                     </table>

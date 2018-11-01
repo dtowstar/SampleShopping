@@ -5,7 +5,8 @@ import javax.mail.internet.*;
 public class sendEmail {
 	public static void send() {
 		// Get properties object
-		String from = "kencs16358@gmail.com";
+		System.out.println("恭喜有呼叫到email但我不想測試");
+		/*String from = "kencs16358@gmail.com";
 		String password = "ken12345678";
 		String to = "接收者Email";
 		String sub = "輸入標題";
@@ -33,7 +34,7 @@ public class sendEmail {
 			System.out.println("message sent successfully");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 	}
 }
 

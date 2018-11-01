@@ -14,9 +14,8 @@ public class updatePD_QuantityCommand implements command{
 		this.totalProduct=totalProduct;
 	}
 	 public void execute(){
-		 cart helfCart = new cart();
-		 helfCart.setShop_ID(Shop_ID);
-		 helfCart.setShop_Quantity(totalProduct);
+		 cart helfCart = null;
+		 helfCart = cartDAO.getCartByShop_ID(Shop_ID);
 		 UPQL.add(helfCart);
 		 cartDAO.updatePD_Quantity(Shop_ID,totalProduct);
 	   }

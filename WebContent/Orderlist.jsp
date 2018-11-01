@@ -95,11 +95,14 @@
                                         	<td style="text-align: right">
                                         		<form action="addtoorder">
                                         		付款方式：
-                                        		<input type="radio" name="paymethod" value="creditcard"><img src="images/visa.png" width="80px" height="30px">
+                                        		<input type="radio" name="paymethod" value="creditcard" checked><img src="images/visa.png" width="80px" height="30px">
                                         		<input type="radio" name="paymethod" value="linepay"><img src="images/linepay.png" width="83px" height="24px">
                                         		<input type="radio" name="paymethod" value="wechatpay"><img src="images/wechatpay.png" width="86px" height="38px">
                                         		<br>
-                                        		<input type="submit" ID="BT_shoplist_toPay" Value="確定購買" >
+                                        		<input type="radio" name="Invoice" value="concreteInvoice" checked>實體發票&nbsp;&nbsp;&nbsp;</input>
+                                        		<input type="radio" name="Invoice" value="electronicInvoice">電子發票&nbsp;&nbsp;&nbsp;</input>
+                                        		<br>
+                                        		<input type="submit" ID="BT_shoplist_toPay" Value="確定購買(clearOrder)" >
                                         		</form>
                                         	</td>
                                         </tr>
