@@ -58,10 +58,13 @@
 											        <ul class="actions">
 												        <li>
                                                         	<input type="submit" ID="BT_Login" Value="　登入　" >
-                                                        	<input type="submit" ID="BT_toRegist" Value="加入會員">
+                                                        	
                                                         </li>
 											        </ul>
 										        </section>
+										    </form>
+										    <form action="regedit.jsp">
+										    	<input type="submit" ID="BT_toRegist" Value="加入會員">
 										    </form>
 										  	<%}else{ %>
 										    <form action="logout">
@@ -84,39 +87,57 @@
 									    </section>
 
 							    </div>
-                                    <!-- Content -->
-                                
-                                    <div class="9u 12u(narrower) important(narrower)">
+                                <!-- Content -->
+                                <div class="9u 12u(narrower)">
                                         <article id="content">
                                                 <header>
 									                <h2>新品上市</h2>
-										            <p>全館滿899免運費</p>
+										            <p>全館買越多送越多</p>
 									            </header>
 									            <div class="row">
 									            	<div class="3u 12u(narrower) important(narrower)">
 									            	廠牌：
-									            	<%String sql = "select DISTINCT PD_Brand from [Products]";
+									            	<%
+									            	String brand = request.getParameter("brand");
+									            	String type = request.getParameter("type");
+									            	if (brand == null){brand="";}
+									            	if (type == null){type="";}
+									            	
+									            	
+									            	String sql = "select DISTINCT PD_Brand from [Products]";
 									            	ResultSet rs = databaseDAO.getResult(sql);
 									            	out.print("<select id='Brand' name='Brand' size='1'>");
-									            	out.print("<option value='*' >全部</option>");
+									            	out.print("<option value=''>全部</option>");
 									            	while (rs.next()){
-									            		out.print("<option value='"+ rs.getString("PD_Brand") +"'>"+ rs.getString("PD_Brand") +"</option> ");
+									            		if (brand.equals(rs.getString("PD_Brand"))){
+									            			out.print("<option value='"+ rs.getString("PD_Brand") +"' selected>"+ rs.getString("PD_Brand") +"</option> ");
+									            		}else{
+									            			out.print("<option value='"+ rs.getString("PD_Brand") +"'>"+ rs.getString("PD_Brand") +"</option> ");
+									            		}
+									            		
 									            	}
 									            	out.print("</select>");
 									            	%>
 									            	</div>
+									            	
 									            	<div class="3u 12u(narrower) important(narrower)">
 									            	類別：
 									            	<% sql = "select DISTINCT PD_Type from [Products]";
 									            	 rs = databaseDAO.getResult(sql);
 									            	out.print("<select id='Type' name='Type' size='1'>");
-									            	out.print("<option value='*' >全部</option>");
+									            	out.print("<option value=''>全部</option>");
 									            	while (rs.next()){
-									            		out.print("<option value='"+ rs.getString("PD_Type") +"'>"+ rs.getString("PD_Type") +"</option> ");
+									            		if (type.equals(rs.getString("PD_Type"))){
+									            			out.print("<option value='"+ rs.getString("PD_Type") +"' selected>"+ rs.getString("PD_Type") +"</option> ");
+									            		}else{
+									            			out.print("<option value='"+ rs.getString("PD_Type") +"'>"+ rs.getString("PD_Type") +"</option> ");
+									            		}
+									            		
 									            	}
 									            	out.print("</select>");
 									            	%>
 									            	</div>
+									            	
 									            	<div class="3u 12u(narrower) important(narrower)">
 									            	</div>
 									            	<div class="3u 12u(narrower) important(narrower)">
@@ -124,7 +145,8 @@
 									            </div>
 									            <div class="row">
 											            <%
-											         		sql= "select * from [Products]";
+											            
+											         		sql= "select * from [Products] where PD_Brand LIKE \'%"+ brand +"%\'and PD_Type LIKE \'%"+ type +"%\'";
 											            	rs = databaseDAO.getResult(sql);
 											            	while(rs.next()){
 											            		out.print("<div class='col-sm-3'><a href='PD.jsp?pid="+ rs.getString("PD_ID") +"'><img src='images/"+ rs.getString("PD_Photo") +"' style='height:208px;width:160px;''></a > <br> "+ rs.getString("PD_Brand") +" "+ rs.getString("PD_Type") +" <br>"+ rs.getString("PD_Name") +" <br> NT: &nbsp;"+ rs.getString("PD_Price") +" </div>\n");
@@ -134,11 +156,8 @@
                                         </article>
                                     </div>
 							</div>
-                            
 						</div>
-                        
-                        
-                        </div>
+                    </div>
 		    </div>
 
 			    <!-- Footer -->
@@ -190,7 +209,17 @@
 					</div>
 				</div>
 
-        
+        <script type="text/javascript">
+	        window.onload = function(){
+	        	$(function(){
+	        		$("select").change(function(){
+	        			var brand = document.getElementById("Brand").value;
+	        			var type = document.getElementById("Type").value;
+	        			document.location = "PDlist.jsp?brand="+brand+"&type="+type;
+	        		})
+	        	})
+	        }
+        </script>
 		<!-- Scripts -->
 
 			<script src="assets/js/jquery.min.js"></script>

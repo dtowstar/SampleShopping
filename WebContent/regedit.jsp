@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, java.sql.*,DAO.*,model.*,discountStrategy.*,shoppingCartCommand.* " language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 
 <html lang="zh-Hans-TW">
@@ -8,16 +8,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" /> 
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="homepage">
+	<body class="no-sidebar">
    		<div id="page-wrapper">
 
 			<!-- Header -->
 				<div id="header-wrapper">
 					<div id="header" class="container">
-
 						<!-- Logo -->
 							<h1 id="logo"><a href="index.jsp">SAMPLE SHOP</a></h1>
-
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
@@ -33,81 +31,36 @@
 									<li><a href="PDlist.jsp">精選活動</a></li>
 								</ul>
 							</nav>
-
 					</div>
+                </div>
 
-					<!-- Hero -->
-						<section id="hero" class="container">
-							<header>
-								<h2>OOteam5購物平台</h2>
-							</header>
-							<p>購物平台首頁</p>
-							<ul class="actions">
-								<li><a href="PDlist.jsp" class="button">See More</a></li>
-							</ul>
-						</section>
-
-				</div>
-
-			<!-- Features 1 -->
+			<!-- Main -->
 				<div class="wrapper">
-					<div class="container">
-						<div class="row">
-							<section class="12u 12u(narrower) feature">
-								<div class="image-wrapper first">
-									<a href="#" class="image featured first"><img src="images/caroupic01.jpg" alt="" /></a>
-								</div>
-								<div class="image-wrapper first">
-									<a href="#" class="image featured first"><img src="images/caroupic02.jpg" alt="" /></a>
-								</div>
-                                <div class="image-wrapper first">
-									<a href="#" class="image featured first"><img src="images/caroupic03.jpg" alt="" /></a>
-								</div>
-							</section>
-							
-						</div>
+					<div class="container" id="main">
+						<!-- Content -->
+						
+                            <div class="row">
+                                <section class="3u 12u(narrower)"></section>
+                                <section class="6u 12u(narrower)">
+                               	<form action="register">
+                               		<p>帳號<input type="text" name="TB_User_Acc" id="TB_User_Acc" placeholder="請輸入帳號" required></p>
+                               		<p>密碼<input type="password" name="TB_User_Pwd" id="TB_User_Pwd" placeholder="請輸入密碼" required></p>
+                               		<p>重複密碼<input type="password" name="TB_User_rePwd" id="TB_User_rePwd" placeholder="請再次輸入密碼" required></p>
+                               		<p>姓名<input type="text" name="TB_User_Name" id="TB_User_Name" placeholder="請輸入姓名" required></p>
+                               		<p>電子信箱<input type="email" name="TB_User_Email" id="TB_User_Email" placeholder="請輸入電子信箱" required></p>
+                               		<p>地址<input type="text" name="TB_User_Address" id="TB_User_Address" placeholder="請輸入地址" required></p>
+                               		<br>
+                               		<input type="submit" value="註冊">
+                               	</form>
+                
+                                </section>
+                                <section class="3u 12u(narrower)"></section>
+                            </div>
 					</div>
 				</div>
-            
-			<!-- Promo -->
-				<div id="promo-wrapper">
-					<section id="promo">
-						<h2>現在即可加入會員，享有會員好禮</h2>
-						<a href="#" class="button">訂閱 Let's Go</a>
-					</section>
-				</div>
 
-			<!-- Features 2 -->
-				<div class="wrapper">
-					<section class="container">
-						<header class="major">
-							<h2>最新活動</h2>
-						</header>
-						<div class="row features">
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper first">
-									<a href="#" class="image featured"><img src="images/pic1.jpg" alt="" /></a>
-								</div>
-								<p>SUMMER RESTOCK</p>
-							</section>
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper">
-									<a href="#" class="image featured"><img src="images/pic2.jpg" alt="" /></a>
-								</div>
-								<p>EARLY SUMMER SALE</p>
-							</section>
-							<section class="4u 12u(narrower) feature">
-								<div class="image-wrapper">
-									<a href="#" class="image featured"><img src="images/pic3.jpg" alt="" /></a>
-								</div>
-								<p>SWEET DRESSES</p>
-							</section>
-						</div>
-					</section>
-				</div>
-
-			<!-- Footer -->
-				<div id="footer-wrapper">
+                <!-- Footer -->
+				    <div id="footer-wrapper">
 					<div id="footer" class="container">
 						<header class="major">
 							<h2>歡迎訂閱我們</h2>
@@ -132,7 +85,7 @@
 									<div class="row 50%">
 										<div class="12u">
 											<ul class="actions">
-												<li><Button type="submit" ID="BT_Subcript"  value="訂閱" ></Button></li>
+												<li><input type="submit" ID="BT_Subscribe" Value="訂閱"></li>
 											</ul>
 										</div>
 									</div>
@@ -144,7 +97,6 @@
                                         <li class="icon fa-facebook"><a href="#"><span class="extra">facebook.com/</span>untitled</a></li>
 										<li class="icon fa-instagram"><a href="#"><span class="extra">instagram.com/</span>untitled</a></li>
 									</ul>
-									
 								</div>
 							</section>
 						</div>
@@ -157,8 +109,16 @@
 				</div>
 
 		</div>
+        <script type="text/javascript">
+	        function UpdateQuantity(sid,id){
+	        	var qid = '#'+id;
+	        	var selected = $(qid).val();
+	        	document.location = "changeCPQ?Shop_ID="+sid+"&P_Quantity="+selected;
+	        }
+	        
+        </script>
+  
 		<!-- Scripts -->
-
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>

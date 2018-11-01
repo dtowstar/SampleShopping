@@ -13,6 +13,21 @@ public class usersDAO {
 	private static String User_LastSpend;
 	private static String User_SubcribePD;
 	
+	public static void insertUser(String account,String password,String Name,String Email,String Address)throws Exception{
+			String sql=String.format("insert into Users(User_Acc,User_Pwd,User_Name,User_Email,User_Address) values('%s','%s','%s','%s','%s')"
+					,account
+					,password
+					,Name
+					,Email
+					,Address
+					);
+			try {
+				databaseDAO.useUpdate(sql);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+	}
+	
 	public static String getUser_Infor(String account,String password,String column) {
 		String sql = "select * from users where User_Acc = \'"+account+"\' AND User_Pwd = \'"+password+"\' ";
 		try {

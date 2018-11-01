@@ -166,20 +166,6 @@
 	        	document.location = "changeCPQ?Shop_ID="+sid+"&P_Quantity="+selected;
 	        }
 	        
-	        <%--document.getElementById("#restoreID").addEventListener(‘onclick’, function(){
-	        	<%restore.useRestore();%>
-	        	location.replace(shopcart.jsp);
-	        }, false);--%>
-	        <%--
-	        document.onkeydown = function(e) {
-	            var keyCode = e.keyCode || e.which || e.charCode;
-	            var ctrlKey = e.ctrlKey || e.metaKey;
-	            if(ctrlKey && keyCode == 90) {
-	            	restore.useRestore();
-	            }
-	            e.preventDefault();
-	            return false;
-	        }--%>
         </script>
   
 		<!-- Scripts -->

@@ -106,7 +106,6 @@
                                     <div class="4u 12u(narrower) important(narrower)">
                                         <article id="content2">
                                         <form action="addtocart">
-                                        	<%System.out.println(request.getParameter("pid")); %>
                                         	<input type="hidden" name="pid" value=<% out.println(request.getParameter("pid"));%> /> 
                                             <section>
                                             <p></p>
@@ -115,6 +114,7 @@
 											    <p>付款方式：信用卡 /LinePay/WeChatPay</p>
 											    <p>購買數量： <select id="Quantity" name="Quantity" size="1"  >
 											    		<%
+											    			
 											    			int count = Integer.parseInt(productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Quantity"));
 											    			
 											    			if(count!=0){
