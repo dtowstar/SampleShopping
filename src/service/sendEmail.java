@@ -2,15 +2,20 @@ package service;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+
+import DAO.usersDAO;
+import DAO.productsDAO;
 public class sendEmail {
-	public static void send() {
+	public static void send(String PD_ID,String User_ID) {
 		// Get properties object
-		System.out.println("恭喜有呼叫到email但我不想測試");
+		System.out.println("恭喜有呼叫到email"+"商品ID是"+PD_ID);
 		/*String from = "kencs16358@gmail.com";
 		String password = "ken12345678";
-		String to = "接收者Email";
-		String sub = "輸入標題";
-		String msg = "輸入內文";
+		String PD_Name=productsDAO.getPD_Infor(PD_ID,"PD_Name");
+		String email=usersDAO.getUser_Infor_With_UserID(User_ID,"User_Email");
+		String to = email;
+		String sub = "來新貨了";
+		String msg = String.format("您訂閱的商品"+PD_Name+"已有新貨");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");

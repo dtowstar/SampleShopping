@@ -40,7 +40,7 @@ public class login extends HttpServlet {
 			String password =request.getParameter("TB_User_Pwd");
 			HttpSession session = request.getSession(true);
 			boolean loginSuccess=false;
-			String newSPD = null;
+			String newSPD = "";
 			loginSuccess=usersDAO.confirmUserLogin(account, password);
 			if(loginSuccess==true){
 				String SPD = usersDAO.getUser_Infor(account, password, "User_SubcribePD");
@@ -50,15 +50,16 @@ public class login extends HttpServlet {
 							 String havaQuantityS = productsDAO.getPD_Infor(i,"PD_Quantity");
 							 int havaQuantity = Integer.parseInt(havaQuantityS);
 							 if(havaQuantity>0) {
-								 sendEmail.send();
+								 sendEmail.send(i,usersDAO.getUser_Infor(account, password, "User_ID"));
 							 } else {
-								 if(newSPD==null){
+								 if((newSPD==null)||(newSPD=="")){
 									 newSPD=i;
 								 }else {
 									 newSPD+=String.format(" "+i);
 								 }
 							 }
 						 }
+						 	 usersDAO.resetUser_SubcribePD(usersDAO.getUser_Infor(account, password, "User_ID"));
 							 usersDAO.updateUser_SubcribePD(usersDAO.getUser_Infor(account, password, "User_ID"),newSPD);
 							 session.setAttribute("User_ID",usersDAO.getUser_Infor(account, password, "User_ID"));
 							 session.setAttribute("User_Name",usersDAO.getUser_Infor(account, password, "User_Name"));

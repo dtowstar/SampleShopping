@@ -34,15 +34,9 @@ public class logout extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		User_ID_Session = String.valueOf(session.getAttribute("User_ID"));
 		User_Name_Session = (String)session.getAttribute("User_Name");
-		System.out.println(User_ID_Session + User_Name_Session);
 		session.setAttribute("User_ID","");
 		session.setAttribute("User_Name","");
 		response.sendRedirect("PDlist.jsp");
-		//session.removeAttribute("User_ID");
-		//session.removeAttribute("User_Name");
-		//System.out.println(User_ID_Session + User_Name_Session);
-		//request.getRequestDispatcher("../PDlist.jsp").forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -116,6 +116,7 @@
 											    <p>購買數量： <select id="Quantity" name="Quantity" size="1"  >
 											    		<%
 											    			int count = Integer.parseInt(productsDAO.getPD_Infor(request.getParameter("pid"),"PD_Quantity"));
+											    			
 											    			if(count!=0){
 											    				int i = 1 ;
 												    			for (i=1;i<=count;i++){

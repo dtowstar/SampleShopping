@@ -107,39 +107,43 @@ public class usersDAO {
 		String sql = String.format("select User_SubcribePD from Users where User_ID = '%d' ",User_ID_I);
 		String User_S=null;
 		try {
-		System.out.println("use selectUser_SubcribePD");
 		ResultSet rs = databaseDAO.getResult(sql);
 		while(rs.next()){
 			User_S=rs.getString("User_SubcribePD");
-			System.out.println(User_S);
 		}
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("use selectUser_SubcribePD end");
 		return User_S;
 	}
 	
 	public static void updateUser_SubcribePD(String User_ID,String SubcribePD_ID) {
-		System.out.println("use updateUser_SubcribePD init 1");
 		String User_S=selectUser_SubcribePD(User_ID);
-		System.out.println("use updateUser_SubcribePD init 2"+User_S);
-		if(User_S==null) {
+		if((User_S==null)||(User_S=="")) {
 			System.out.println(User_S);
 			User_S=SubcribePD_ID;
 			System.out.println(User_S);
 		}else {
 			System.out.println(User_S);
-			User_S=SubcribePD_ID;
+			User_S+=String.format(" "+SubcribePD_ID);
 			System.out.println(User_S);
 		}
-		System.out.println("use updateUser_SubcribePD init 3"+User_S);
 		int User_ID_I = Integer.parseInt(User_ID);
 		String sql = String.format("update Users set User_SubcribePD = '%s' where User_ID = '%d' ", User_S, User_ID_I);
 		try {
-			System.out.println("有使用updateUser_SubcribePD資料庫");
 			databaseDAO.useUpdate(sql);
-			System.out.println("有使用updateUser_SubcribePD資料庫1");
+
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void resetUser_SubcribePD(String User_ID) {
+		String User_S="";
+		int User_ID_I = Integer.parseInt(User_ID);
+		String sql = String.format("update Users set User_SubcribePD = '%s' where User_ID = '%d' ",User_S,User_ID_I);
+		try {
+			databaseDAO.useUpdate(sql);
 
 		}catch(Exception e) {
 			System.out.println(e);

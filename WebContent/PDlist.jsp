@@ -93,10 +93,39 @@
 										            <p>全館滿899免運費</p>
 									            </header>
 									            <div class="row">
+									            	<div class="3u 12u(narrower) important(narrower)">
+									            	廠牌：
+									            	<%String sql = "select DISTINCT PD_Brand from [Products]";
+									            	ResultSet rs = databaseDAO.getResult(sql);
+									            	out.print("<select id='Brand' name='Brand' size='1'>");
+									            	out.print("<option value='*' >全部</option>");
+									            	while (rs.next()){
+									            		out.print("<option value='"+ rs.getString("PD_Brand") +"'>"+ rs.getString("PD_Brand") +"</option> ");
+									            	}
+									            	out.print("</select>");
+									            	%>
+									            	</div>
+									            	<div class="3u 12u(narrower) important(narrower)">
+									            	類別：
+									            	<% sql = "select DISTINCT PD_Type from [Products]";
+									            	 rs = databaseDAO.getResult(sql);
+									            	out.print("<select id='Type' name='Type' size='1'>");
+									            	out.print("<option value='*' >全部</option>");
+									            	while (rs.next()){
+									            		out.print("<option value='"+ rs.getString("PD_Type") +"'>"+ rs.getString("PD_Type") +"</option> ");
+									            	}
+									            	out.print("</select>");
+									            	%>
+									            	</div>
+									            	<div class="3u 12u(narrower) important(narrower)">
+									            	</div>
+									            	<div class="3u 12u(narrower) important(narrower)">
+									            	</div>
+									            </div>
+									            <div class="row">
 											            <%
-											            	
-											         		String sql= "select * from [Products]";
-											            	ResultSet rs = databaseDAO.getResult(sql);
+											         		sql= "select * from [Products]";
+											            	rs = databaseDAO.getResult(sql);
 											            	while(rs.next()){
 											            		out.print("<div class='col-sm-3'><a href='PD.jsp?pid="+ rs.getString("PD_ID") +"'><img src='images/"+ rs.getString("PD_Photo") +"' style='height:208px;width:160px;''></a > <br> "+ rs.getString("PD_Brand") +" "+ rs.getString("PD_Type") +" <br>"+ rs.getString("PD_Name") +" <br> NT: &nbsp;"+ rs.getString("PD_Price") +" </div>\n");
 											            	}
