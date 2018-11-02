@@ -55,23 +55,30 @@
                                 			</tr>
                                 		</thead>
 									<% 
-										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(Integer.parseInt(String.valueOf(session.getAttribute("User_ID")))); 
-										int index = 0;
+										ArrayList<cart> cartlists = cartDAO.getCartByUser_ID(Integer.parseInt(String.valueOf(session.getAttribute("User_ID"))));
+										boolean empty=cartlists.isEmpty();
+										if(!cartlists.isEmpty()){
+											
+											int index = 0;
+												
+												for (cart cartlist : cartlists){
+													index++;
+													String qid = String.valueOf(index);
+													out.print("<tr align='center' valign='middle'><td>"
+													+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='刪除'></a> "
+													+"</td><td>"
+													+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") 
+													+"</td><td>"
+													+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") 
+													+"</td><td><select id='"+index+"' name='"+index+"' size='1' onchange='UpdateQuantity("+cartlist.getShop_ID()+","+qid+")'>"+
+													cartDAO.getSelectCase(cartlist.getPD_ID(),cartlist.getShop_Quantity())
+													+"</td><td>"
+													+ cartDAO.getSumPrice(cartlist)
+													+"</td></tr>");
+												}
 										
-										for (cart cartlist : cartlists){
-											index++;
-											String qid = String.valueOf(index);
-											out.print("<tr align='center' valign='middle'><td>"
-											+"<a href='deletecart?Shop_ID="+cartlist.getShop_ID()+" '><input type='button' value='刪除'></a> "
-											+"</td><td>"
-											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Name") 
-											+"</td><td>"
-											+ productsDAO.getPD_Infor(String.valueOf(cartlist.getPD_ID()), "PD_Price") 
-											+"</td><td><select id='"+index+"' name='"+index+"' size='1' onchange='UpdateQuantity("+cartlist.getShop_ID()+","+qid+")'>"+
-											cartDAO.getSelectCase(cartlist.getPD_ID(),cartlist.getShop_Quantity())
-											+"</td><td>"
-											+ cartDAO.getSumPrice(cartlist)
-											+"</td></tr>");
+										}else{
+											out.print("<p>沒有加入商品</p>");
 										}
 									%>
 									</table>
@@ -92,11 +99,17 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
+
                                             	<a href="useRestores"><input type="button" ID="restoreID" Value="回上一步" ></a>
+                                          
                                             	&nbsp;&nbsp;&nbsp;
                                             	<a href="PDlist.jsp"><input type="submit" ID="BT_shoplist_toBuy" Value="繼續購物" ></a>
                                             	&nbsp;&nbsp;&nbsp;
-                                            	<a href="Orderlist.jsp"><input type="submit" ID="BT_shoplist_toPay" Value="完成訂單" ></a>
+                                            <% 
+                                            	if(!empty){
+                                            	out.print("<a href='Orderlist.jsp'><input type='submit' ID='BT_shoplist_toPay' Value='完成訂單' ></a>");
+                                            	}
+                                            %>
                                             	&nbsp;&nbsp;&nbsp;
                                             	
                                             </td>

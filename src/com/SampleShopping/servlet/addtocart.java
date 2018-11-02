@@ -43,8 +43,8 @@ public class addtocart extends HttpServlet {
 			}
 			else {
 				if (cartDAO.ishascart(User_ID, pid)) {
-					response.setContentType("text/html;charset=UTF-8"); 
-					response.getWriter().println("<script>alert('商品已加入購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
+					response.setContentType("text/html ;charset=UTF-8"); 
+					response.getWriter().println("<script>alert('提醒：商品已經存在於購物車'); window.location='PD.jsp?pid="+ pid +"' </script>");
 				}else{
 					cartDAO.addcart(User_ID, pid, quantity);
 					response.setContentType("text/html;charset=UTF-8");
