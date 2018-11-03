@@ -1,7 +1,7 @@
 package shoppingCartCommand;
 
-import DAO.cartDAO;
-import model.cart;
+import DAO.cartDAO;//12
+import model.cart;//8
 import java.util.ArrayList;
 public class deletecartCommand implements command{
 	private int Shop_ID;

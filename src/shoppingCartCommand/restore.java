@@ -2,16 +2,16 @@ package shoppingCartCommand;
 
 import java.util.List;
 
-import DAO.databaseDAO;
-import DAO.cartDAO;
+
+import DAO.cartDAO;//12
 import java.util.ArrayList;
-import model.cart;
+import model.cart;//8
 
 public class restore {
 	public static void useRestore() {
-		 List<command> history = invoker.getCommandList();
-		 ArrayList<cart> DC = deletecartCommand.getDC();
-		 ArrayList<cart> UCQ = updatePD_QuantityCommand.getUPQL();
+		 List<command> history = invoker.getCommandList();//5
+		 ArrayList<cart> DC = deletecartCommand.getDC();//4
+		 ArrayList<cart> UCQ = updatePD_QuantityCommand.getUPQL();//4
 		 int historyL = history.size();
 		 int DCL = DC.size();
 		 int UCQL = UCQ.size();

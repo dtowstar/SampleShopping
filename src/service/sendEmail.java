@@ -1,15 +1,17 @@
 package service;
 import java.util.Properties;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import DAO.usersDAO;
-import DAO.productsDAO;
+import DAO.usersDAO;//8
+import DAO.productsDAO;//2
+
 public class sendEmail {
 	public static void send(String PD_ID,String User_ID) {
 		// Get properties object
-		System.out.println("恭喜有呼叫到email"+"商品ID是"+PD_ID);
-		/*String from = "kencs16358@gmail.com";
+
+		String from = "kencs16358@gmail.com";
 		String password = "ken12345678";
 		String PD_Name=productsDAO.getPD_Infor(PD_ID,"PD_Name");
 		String email=usersDAO.getUser_Infor_With_UserID(User_ID,"User_Email");
@@ -39,7 +41,7 @@ public class sendEmail {
 			System.out.println("message sent successfully");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
-		}*/
+		}
 	}
 }
 

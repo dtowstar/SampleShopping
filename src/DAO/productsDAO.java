@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.ResultSet;
 
+
 public class productsDAO {
 	private static String PD_Name;
 	private static String PD_Brand;

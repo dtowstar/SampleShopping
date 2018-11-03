@@ -6,8 +6,6 @@ public class databaseDAO {
 	
 	private static Connection conn = null;
 
-	public databaseDAO() {};
-
 	public static ResultSet getResult(String SQL) throws SQLException,ClassNotFoundException{
 			if(conn == null )
 			{

@@ -9,9 +9,9 @@ import discountStrategy.discountParent;
 import model.cart;
 import model.choseDiscountModel;
 
-public class discount2Handler extends Handler{
-	discountParent choseDiscount = null;
-	ArrayList<cart> cartlist;
+public class discount2Handler extends Handler{//3
+	discountParent choseDiscount = null;//8
+	ArrayList<cart> cartlist;//8
 	int productQ;
 	 public discountParent handlerRequest(choseDiscountModel CORM) {
 		 cartlist = CORM.getCartlist();
@@ -24,7 +24,7 @@ public class discount2Handler extends Handler{
 		 		}
 		 	}
         if (choseDiscount==null) {
-        	Handler next = new discount1Handler();
+        	Handler next = new discount1Handler();//3
         	setSuccessor(next);
             return getSuccessor().handlerRequest(CORM);
         }else {

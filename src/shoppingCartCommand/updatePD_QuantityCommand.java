@@ -2,9 +2,9 @@ package shoppingCartCommand;
 
 import java.util.ArrayList;
 
-import DAO.cartDAO;
-import model.cart;
-
+import DAO.cartDAO;//12
+import model.cart;//8
+//4
 public class updatePD_QuantityCommand implements command{
 	private static ArrayList<cart> UPQL = new ArrayList<cart>();
 	private int Shop_ID;

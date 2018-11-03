@@ -2,11 +2,12 @@ package discountStrategy;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import DAO.*;
-import model.cart;
-import model.choseDiscountModel;
-import chainOfResponsibility.Handler;
-import chainOfResponsibility.discount4Handler;
+import DAO.cartDAO;//12
+import DAO.usersDAO;//8
+import model.cart;//8
+import model.choseDiscountModel;//7
+import chainOfResponsibility.Handler;//2
+import chainOfResponsibility.discount4Handler;//3
 public class determine {
 	private  int afterDiscountPrice;
 	private  discountParent choseDiscount=null;

@@ -1,9 +1,9 @@
 package discountStrategy;
 
-import DAO.*;
+import DAO.cartDAO;//12
 import java.util.ArrayList;
 
-import model.cart;
+import model.cart;//8
 public class discount4 extends discountParent{
 	private ArrayList<cart> cartlist;
 	private int productQ;

@@ -1,15 +1,14 @@
 package chainOfResponsibility;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import discountStrategy.*;
 import model.choseDiscountModel;
 import model.cart;
 
-public class discount1Handler extends Handler{
-	discountParent choseDiscount = null;
-	ArrayList<cart> cartlist;
+public class discount1Handler extends Handler{//3
+	discountParent choseDiscount = null;//8
+	ArrayList<cart> cartlist;//8
 	 public discountParent handlerRequest(choseDiscountModel CORM) {
 		 cartlist = CORM.getCartlist();
 		 if(cartlist.size()==3 && choseDiscount==null) {
@@ -17,7 +16,7 @@ public class discount1Handler extends Handler{
 				choseDiscount.setcartlist(cartlist);
 				return choseDiscount;
 		} else {
-			Handler next = new noDiscountHandler();
+			Handler next = new noDiscountHandler();//3
 			setSuccessor(next);
 			return getSuccessor().handlerRequest(CORM);
         }

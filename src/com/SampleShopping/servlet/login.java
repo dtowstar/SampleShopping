@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.*;
-import java.util.*;
-import service.sendEmail;
+import DAO.usersDAO;//8
+import DAO.productsDAO;//2
+import service.sendEmail;//1
 
 
 /**

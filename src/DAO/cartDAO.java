@@ -2,8 +2,8 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import model.cart;
-
+import model.cart;//8
+//2
 public class cartDAO {
 	
 	public static ArrayList<cart> getCartByUser_ID(int User_ID){
