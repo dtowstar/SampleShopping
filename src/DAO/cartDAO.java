@@ -24,7 +24,7 @@ public class cartDAO {
 		}catch(Exception e) {
 			System.out.println(e);
 		}
-		return cartlist; 
+		return cartlist;
 	}
 	public static String getSelectCase(int PD_ID,int Shop_Quantity) {
 		String sql = "select * from Products where PD_ID = "+PD_ID+" ";
@@ -63,7 +63,19 @@ public class cartDAO {
 		  }
 		  return getcart; 
 		 }
-	
+	public static int getUserIDByShopID(int Shop_ID) {
+		String sql = "select User_ID from Cart where Shop_ID = "+Shop_ID+" ";
+		int userID=0;
+		try {
+			  ResultSet rs = databaseDAO.getResult(sql);
+			  while(rs.next()){
+				  userID=rs.getInt("User_ID");
+			  }
+			  }catch(Exception e) {
+			   System.out.println(e);
+			  }
+		return userID;
+	}
 	public static void addcart(String User_ID,String PD_ID,String Quantity) {
 		String sql = String.format("insert into Cart(User_ID,PD_ID,Shop_Quantity) values ('%d','%d','%d')",Integer.parseInt(User_ID),Integer.parseInt(PD_ID),Integer.parseInt(Quantity));
 		try {
@@ -87,6 +99,15 @@ public class cartDAO {
 	
 	public static void deleteCart(int Shop_ID) {
 		String sql = String.format("delete from Cart where Shop_ID = \'"+Shop_ID+"\' ");
+		try {
+			databaseDAO.useUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void deletebyUserID(int User_ID) {
+		String sql = String.format("delete from Cart where User_ID = \'"+User_ID+"\' ");
 		try {
 			databaseDAO.useUpdate(sql);
 		}catch(Exception e) {

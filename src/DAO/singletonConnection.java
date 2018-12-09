@@ -12,7 +12,7 @@ public class singletonConnection {
 	public Connection getConnection() {
 		Connection conn = null;
 		String DRIVER="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-		String URL="jdbc:sqlserver://localhost:1433;databaseName=SampleShop";
+		String URL="jdbc:sqlserver://104.199.202.159:1433;databaseName=SampleShop";
 		String USERNAME="sa";
 		String PASSWORD="sa";
 			 try

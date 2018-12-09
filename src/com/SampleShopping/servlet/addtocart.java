@@ -38,9 +38,9 @@ public class addtocart extends HttpServlet {
 		String User_ID = String.valueOf(session.getAttribute("User_ID"));
 		if ((User_ID!= null) || (User_ID=="")){
 			if(quantity.equals("0")) {
-				System.out.println("進入改訂月");
+				System.out.println("進入改訂閱");
 				usersDAO.updateUser_SubcribePD(User_ID,pid);
-				System.out.println("進入改訂月完成");
+				System.out.println("進入改訂閱完成");
 				response.setContentType("text/html;charset=UTF-8"); 
 				response.getWriter().println("<script>alert('商品已訂閱'); window.location='PDlist.jsp' </script>");
 			}

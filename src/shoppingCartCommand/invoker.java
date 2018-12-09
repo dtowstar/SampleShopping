@@ -1,9 +1,13 @@
 package shoppingCartCommand;
 import java.util.*;
+
+import DAO.cartDAO;
+import memento.caretaker;
+import memento.originator;
 public class invoker {
 	 private static List<command> history = new ArrayList<command>();//1
 	 private static invoker Instance = null;
-	   
+	 
 	   public static invoker createInvoker() {
 		   if(Instance==null) {
 			   Instance=new invoker();
@@ -14,7 +18,7 @@ public class invoker {
 	   }
 	   
 	   public void storeAndExecute(command cmd) {
-	      this.history.add(cmd); // optional 
+	      history.add(cmd); // optional
 	      cmd.execute();        
 	   }
 	   
